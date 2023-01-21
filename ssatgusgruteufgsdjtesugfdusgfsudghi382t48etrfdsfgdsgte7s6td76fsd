@@ -1,3 +1,5 @@
+
+
 repeat task.wait() until game:IsLoaded() and game:GetService("Players").LocalPlayer 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main//CustomModules/6872274481.lua",true))()
 local Player = game:GetService("Players").LocalPlayer
@@ -3233,6 +3235,68 @@ runcode(function()
 	})
 end)
 
+runcode(function()
+	local TS = game:GetService("TweenService")
+	local HeatSeekerBooster = {["Enabled"] = false}
+	HeatSeekerBooster = GuiLibrary["ObjectsThatCanBeSaved"]["BlatantWindow"]["Api"].CreateOptionsButton({
+		["Name"] = "HeatSeeker",
+		["HoverText"] = "Gives You A Small Boost Every Fiew Seconds",
+		["Function"] = function(callback)
+			if callback then
+				repeat task.wait() until game:IsLoaded()
+				if entity.isAlive then
+					if HeatSeekerBoosterModes["Value"] == "LookVector" then
+						spawn(function()
+							for HeatSeekerBoosterLookVector = 1, math.huge do
+								task.wait(3.5)
+								game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame + game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame.lookVector * 2
+								if HeatSeekerBoosterNoti["Enabled"] then
+									createwarning("HeatSeeker", "Boosted", 2)
+								end
+								if (not HeatSeekerBooster["Enabled"]) then
+									break
+								end
+							end
+						end)
+					elseif HeatSeekerBoosterModes["Value"] == "TweenService" then
+						spawn(function()
+							for HeatSeekerBoosterTweenService = 1, math.huge do
+								task.wait(3.5)
+								for HeatSeekerBoosterTween = 1, 3 do
+									local Prim = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+									local TweenBoost = TS:Create(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), TweenInfo.new(0.5), {CFrame = Prim + Prim.lookVector * 10})
+									TweenBoost:play()
+									TweenBoost.Completed:Wait()
+								end
+								if HeatSeekerBoosterNoti["Enabled"] then
+									createwarning("HeatSeeker", "Boosted", 2)
+								end
+								if (not HeatSeekerBooster["Enabled"]) then
+									break
+								end
+							end
+						end)
+					end
+				else
+					HeatSeekerBooster["ToggleButton"](false)
+				end
+			end
+		end
+	})
+	HeatSeekerBoosterModes = HeatSeekerBooster.CreateDropdown({
+		["Name"] = "Mode",
+		["List"] = {"LookVector", "TweenService"},
+		["Function"] = function() end
+	})
+	HeatSeekerBoosterNoti = HeatSeekerBooster.CreateToggle({
+		["Name"] = "Notification",
+		["Function"] = function() end, 
+		["Default"] = false,
+		["HoverText"] = "Notify's You"
+	})
+end)
+
+
 
 local NoAttackID = {
     "ApePurchaseAccount",
@@ -3280,6 +3344,7 @@ end
 
 
 
+
 GuiLibrary["RemoveObject"]("DeathTPOptionsButton")
 GuiLibrary["RemoveObject"]("AutoBankOptionsButton")
 GuiLibrary["RemoveObject"]("AnticheatBypassOptionsButton")
@@ -3317,6 +3382,9 @@ end
 
 local plr1 = game.Players.LocalPlayer
 createwarning("Ape", "Logged in as "..(plr1.Name or plr1.DisplayName), 3)
+
+
+
 
 
 
