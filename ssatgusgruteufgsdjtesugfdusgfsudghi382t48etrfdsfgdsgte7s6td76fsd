@@ -3298,6 +3298,8 @@ end)
 
 
 
+
+
 local NoAttackID = {
     "ApePurchaseAccount",
 	"ApeUser12349190",
@@ -3316,6 +3318,7 @@ for i, v in pairs(game:GetService("Players"):GetChildren()) do
 		end
 	end
 end
+
 
 
 			
@@ -3344,34 +3347,37 @@ end
 
 
 
-
-GuiLibrary["RemoveObject"]("DeathTPOptionsButton")
-GuiLibrary["RemoveObject"]("AutoBankOptionsButton")
-GuiLibrary["RemoveObject"]("AnticheatBypassOptionsButton")
-GuiLibrary["RemoveObject"]("SwimOptionsButton")
-GuiLibrary["RemoveObject"]("ReachOptionsButton")
-GuiLibrary["RemoveObject"]("SpinBotOptionsButton")
-GuiLibrary["RemoveObject"]("TargetStrafeOptionsButton")
-GuiLibrary["RemoveObject"]("GravityOptionsButton")
-GuiLibrary["RemoveObject"]("HighJumpOptionsButton")
-GuiLibrary["RemoveObject"]("ArrowsOptionsButton")
-GuiLibrary["RemoveObject"]("BedESPOptionsButton")
-GuiLibrary["RemoveObject"]("BedPlatesOptionsButton")
-GuiLibrary["RemoveObject"]("ChamsOptionsButton")
-GuiLibrary["RemoveObject"]("FullbrightOptionsButton")
-GuiLibrary["RemoveObject"]("SearchOptionsButton")
-GuiLibrary["RemoveObject"]("RavenTPOptionsButton")
-GuiLibrary["RemoveObject"]("FishermanExploitOptionsButton")
-GuiLibrary["RemoveObject"]("PanicOptionsButton")
-GuiLibrary["RemoveObject"]("MissileTPOptionsButton")
-GuiLibrary["RemoveObject"]("AutoToxicOptionsButton")
-GuiLibrary["RemoveObject"]("ChatSpammerOptionsButton")
-GuiLibrary["RemoveObject"]("AutoKitOptionsButton")
-GuiLibrary["RemoveObject"]("AutoJuggernautOptionsButton")
-GuiLibrary["RemoveObject"]("XrayOptionsButton")
-GuiLibrary["RemoveObject"]("BedProtectorOptionsButton")
-GuiLibrary["RemoveObject"]("AutoSuffocateOptionsButton")
-GuiLibrary["RemoveObject"]("SchematicaOptionsButton")
+if (_G.AllVapeFeatures == false) then
+	GuiLibrary["RemoveObject"]("DeathTPOptionsButton")
+    GuiLibrary["RemoveObject"]("AutoBankOptionsButton")
+    GuiLibrary["RemoveObject"]("AnticheatBypassOptionsButton")
+    GuiLibrary["RemoveObject"]("SwimOptionsButton")
+    GuiLibrary["RemoveObject"]("ReachOptionsButton")
+    GuiLibrary["RemoveObject"]("SpinBotOptionsButton")
+    GuiLibrary["RemoveObject"]("TargetStrafeOptionsButton")
+    GuiLibrary["RemoveObject"]("GravityOptionsButton")
+    GuiLibrary["RemoveObject"]("HighJumpOptionsButton")
+    GuiLibrary["RemoveObject"]("ArrowsOptionsButton")
+    GuiLibrary["RemoveObject"]("BedESPOptionsButton")
+    GuiLibrary["RemoveObject"]("BedPlatesOptionsButton")
+    GuiLibrary["RemoveObject"]("ChamsOptionsButton")
+    GuiLibrary["RemoveObject"]("FullbrightOptionsButton")
+	GuiLibrary["RemoveObject"]("SearchOptionsButton")
+	GuiLibrary["RemoveObject"]("RavenTPOptionsButton")
+	GuiLibrary["RemoveObject"]("FishermanExploitOptionsButton")
+	GuiLibrary["RemoveObject"]("PanicOptionsButton")
+	GuiLibrary["RemoveObject"]("MissileTPOptionsButton")
+	GuiLibrary["RemoveObject"]("AutoToxicOptionsButton")
+	GuiLibrary["RemoveObject"]("ChatSpammerOptionsButton")
+	GuiLibrary["RemoveObject"]("AutoKitOptionsButton")
+	GuiLibrary["RemoveObject"]("AutoJuggernautOptionsButton")
+	GuiLibrary["RemoveObject"]("XrayOptionsButton")
+	GuiLibrary["RemoveObject"]("BedProtectorOptionsButton")
+	GuiLibrary["RemoveObject"]("AutoSuffocateOptionsButton")
+	GuiLibrary["RemoveObject"]("SchematicaOptionsButton")
+else
+	print("All Features Enabled")
+end
 
 if table.find(SkidHWID, HWID) then
 	createwarning("Ape ", "Thank You For Using Ape SKID", 69)
@@ -3382,6 +3388,8 @@ end
 
 local plr1 = game.Players.LocalPlayer
 createwarning("Ape", "Logged in as "..(plr1.Name or plr1.DisplayName), 3)
+
+
 
 
 
