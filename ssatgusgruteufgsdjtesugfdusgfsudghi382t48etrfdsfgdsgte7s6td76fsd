@@ -2987,13 +2987,17 @@ end)
 
 
 runcode(function()
-	function GotoAllBeds(GotoAllBedsDEL)
+	function GotoAllBeds(GotoAllBedsDEL, TPUPBED)
 		for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
 			if v.Name == "bed" then
 				if v.Covers.BrickColor ~= game.Players.LocalPlayer.Team.TeamColor then
 					game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid").Health = 0
 					Player.CharacterAdded:Wait()
-					game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.CFrame + Vector3.new(0,2,0)
+					if TPUPBED ~= nil then
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.CFrame + Vector3.new(0,10,0)
+					else
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = v.CFrame + Vector3.new(0,2,0)
+					end
 					if GotoAllBedsDEL ~= nil then
 						task.wait(GotoAllBedsDEL)
 					else
@@ -3046,7 +3050,7 @@ runcode(function()
 					end
 					if DeathAutowinCheck == 1 then
 						createwarning("Ape", "Destroying Beds", 5)
-						GotoAllBeds(4.5)
+						GotoAllBeds(4.5,)
 						createwarning("Ape", "Killing Players", 5)
 						GotoPlayers()
 						createwarning("Ape", "You Won !", 3)
@@ -3276,6 +3280,24 @@ runcode(function()
 								end
 							end
 						end)
+					elseif HeatSeekerBoosterModes["Value"] == "Long" then
+						spawn(function()
+							for HeatSeekerBoosterTweenLong = 1, math.huge do
+								task.wait(3.5)
+								for HeatSeekerBoosterLong = 1, 1 do
+									local Prim = game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+									local TweenBoostLONG = TS:Create(game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), TweenInfo.new(0.5), {CFrame = Prim + Prim.lookVector * 15})
+									TweenBoostLONG:play()
+									TweenBoostLONG.Completed:Wait()
+								end
+								if HeatSeekerBoosterNoti["Enabled"] then
+									createwarning("HeatSeeker", "Boosted", 2)
+								end
+								if (not HeatSeekerBooster["Enabled"]) then
+									break
+								end
+							end
+						end)
 					end
 				else
 					HeatSeekerBooster["ToggleButton"](false)
@@ -3285,7 +3307,7 @@ runcode(function()
 	})
 	HeatSeekerBoosterModes = HeatSeekerBooster.CreateDropdown({
 		["Name"] = "Mode",
-		["List"] = {"LookVector", "TweenService"},
+		["List"] = {"LookVector", "TweenService", "Long"},
 		["Function"] = function() end
 	})
 	HeatSeekerBoosterNoti = HeatSeekerBooster.CreateToggle({
@@ -3295,7 +3317,6 @@ runcode(function()
 		["HoverText"] = "Notify's You"
 	})
 end)
-
 
 
 
