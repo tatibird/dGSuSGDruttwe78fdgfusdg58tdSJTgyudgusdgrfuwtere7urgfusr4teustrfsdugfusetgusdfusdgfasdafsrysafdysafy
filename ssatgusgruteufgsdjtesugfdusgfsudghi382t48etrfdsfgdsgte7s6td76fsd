@@ -46,19 +46,6 @@ local lagbackevent = Instance.new("BindableEvent")
 local allowspeed = true
 local antivoiding = false
 local textchatservice = game:GetService("TextChatService")
-local bettergetfocus = function()
-	if KRNL_LOADED then
-		-- krnl is so garbage, you literally cannot detect focused textbox with UIS
-		if game:GetService("StarterGui"):GetCoreGuiEnabled(Enum.CoreGuiType.Chat) then
-			if textchatservice and textchatservice.ChatVersion == Enum.ChatVersion.TextChatService then
-				return ((game:GetService("CoreGui").ExperienceChat.appLayout.chatInputBar.Background.Container.TextContainer.TextBoxContainer.TextBox:IsFocused() or searchbar:IsFocused()) and true or nil)
-			else
-				return ((game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:IsFocused() or searchbar:IsFocused()) and true or nil) 
-			end
-		end
-	end
-	return game:GetService("UserInputService"):GetFocusedTextBox()
-end
 local betterisfile = function(file)
 	local suc, res = pcall(function() return readfile(file) end)
 	return suc and res ~= nil
@@ -2185,7 +2172,6 @@ local function findItemInTable(tab, item)
 end
 
 
-
 --Ape
 runcode(function()
     --PingFly
@@ -3050,7 +3036,7 @@ runcode(function()
 					end
 					if DeathAutowinCheck == 1 then
 						createwarning("Ape", "Destroying Beds", 5)
-						GotoAllBeds(4.5,)
+						GotoAllBeds(4.5)
 						createwarning("Ape", "Killing Players", 5)
 						GotoPlayers()
 						createwarning("Ape", "You Won !", 3)
@@ -3227,8 +3213,6 @@ runcode(function()
 					for HangGliderDisabler = 1, math.huge do
 						task.wait()
 						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.HangGliderUse:FireServer({})
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.nhpbHEaBAC:FireServer()
-						game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.bmuhonrRlkuwan:FireServer()
 					end
 				else
 					createwarning("Partical Disabler", "Failled To Find Hang Glider", 2)
@@ -3238,6 +3222,8 @@ runcode(function()
 		end
 	})
 end)
+
+
 
 runcode(function()
 	local TS = game:GetService("TweenService")
@@ -3321,11 +3307,53 @@ end)
 
 
 
+runcode(function()
+	local AutoRape = {["Enabled"] = false}
+	AutoRape = GuiLibrary["ObjectsThatCanBeSaved"]["UtilityWindow"]["Api"].CreateOptionsButton({
+		["Name"] = "AutoRape",
+		["HoverText"] = "Rapes Other Player",
+		["Function"] = function(callback)
+			if callback then
+				if entity.isAlive then
+					RunLoops:BindToHeartbeat("AutoRap", 1, function()
+						local plrsraper = GetAllNearestHumanoidToPosition(true, AutoRapeDist, 1000, true)
+						for i,plr in pairs(plrsraper) do
+							if plr ~= game:GetService("Players").LocalPlayer then --and plr:GetAttribute("Team") ~= game:GetService("Players").LocalPlayer:GetAttribute("Team") then
+								spawn(function()
+									if plr ~= nil and plr.Character then
+										game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = plr.Character:FindFirstChild("HumanoidRootPart").CFrame
+									end
+								end)
+							end
+						end
+					end)
+				end
+			else
+				RunLoops:UnbindFromHeartbeat("AutoRap")
+			end
+		end
+	})
+
+	AutoRapeDist = AutoRape.CreateSlider({
+		["Name"] = "Rape Distance",
+		["Min"] = 5,
+		["Max"] = 20,
+		["Default"] = 10,
+		["Function"] = function(val)
+			AutoRapeDist = val
+		end
+	})
+end)
+
+
+
+
 local NoAttackID = {
     "ApePurchaseAccount",
 	"ApeUser12349190",
 	"addmemightboostyou", -- the god
 	"dfgh45ygrfhgfhj", -- DADDY INK
+	"ApeGamerJuice",
 	"iamtocoolngl" -- the god
 }
 
@@ -3400,6 +3428,7 @@ else
 	print("All Features Enabled")
 end
 
+
 if table.find(SkidHWID, HWID) then
 	createwarning("Ape ", "Thank You For Using Ape SKID", 69)
 else
@@ -3409,6 +3438,8 @@ end
 
 local plr1 = game.Players.LocalPlayer
 createwarning("Ape", "Logged in as "..(plr1.Name or plr1.DisplayName), 3)
+
+
 
 
 
