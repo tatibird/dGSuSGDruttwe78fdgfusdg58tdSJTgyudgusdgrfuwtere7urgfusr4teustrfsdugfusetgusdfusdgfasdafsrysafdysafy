@@ -3369,6 +3369,25 @@ runcode(function()
 
 end)
 
+runcode(function()
+	local TPMiddle = {["Enabled"] = false}
+	TPMiddle = GuiLibrary["ObjectsThatCanBeSaved"]["UtilityWindow"]["Api"].CreateOptionsButton({
+		["Name"] = "SkywarsMiddle",
+		["HoverText"] = "Teleports You To The Middle In Skywars (no game check )",
+		["Function"] = function(callback)
+			if callback then
+				local TPMiddleCONNECT = game:GetService("ReplicatedStorage").rbxts_include.node_modules["@rbxts"].net.out._NetManaged.MatchStateEvent.OnClientEvent:Connect(function()
+					game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = game:GetService("Workspace").SpectatorPlatform:FindFirstChild("floor").CFrame - Vector3.new(0,15,0)
+					task.wait(.2)
+					game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = game:GetService("Workspace").SpectatorPlatform:FindFirstChild("floor").CFrame - Vector3.new(0,15,0)
+				end)
+			else
+				TPMiddleCONNECT:Disconnect()
+			end
+		end
+	})
+
+end)
 
 
 local NoAttackID = {
@@ -3464,4 +3483,7 @@ createwarning("Ape", "Logged in as "..(plr1.Name or plr1.DisplayName), 3)
 
 
 
-            						
+
+
+
+
