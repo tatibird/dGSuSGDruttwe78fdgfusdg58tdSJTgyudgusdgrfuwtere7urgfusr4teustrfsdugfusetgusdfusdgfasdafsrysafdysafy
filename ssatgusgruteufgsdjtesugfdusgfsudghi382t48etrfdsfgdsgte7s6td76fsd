@@ -3157,6 +3157,23 @@ runcode(function()
 									game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/bedwars","All")
 								end
 							end
+							if RetardoDectetorRacist["Enabled"] then
+								for i, plr in pairs(game:GetService("Players"):GetChildren()) do
+									if table.find(AlrCheckList, plr.Name) then
+										continue
+									else
+										if plr.Character then
+											if plr.Character:FindFirstChild("Head")["BrickColor"] == (BrickColor.new("Really black")) then
+												table.insert(AlrCheckList, plr.Name)
+												createwarning("RetardoDectetor", "Found A Black Person "..plr.Name, 2)
+												if RetardoDectetorLeave["Enabled"] then
+													game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("/bedwars","All")
+												end
+											end
+										end
+									end
+								end
+							end
 						end
 					end
 				end)
@@ -3171,6 +3188,12 @@ runcode(function()
 		["Function"] = function() end, 
 		["Default"] = false,
 		["HoverText"] = "Leaves When A Retard Joins"
+	})
+	RetardoDectetorRacist = RetardoDectetor.CreateToggle({
+		["Name"] = "Black People Detector",
+		["Function"] = function() end, 
+		["Default"] = false,
+		["HoverText"] = "Notifys you when a black person joins"
 	})
 end)
 
@@ -3318,7 +3341,7 @@ runcode(function()
 					RunLoops:BindToHeartbeat("AutoRap", 1, function()
 						local plrsraper = GetAllNearestHumanoidToPosition(true, AutoRapeDist, 1000, true)
 						for i,plr in pairs(plrsraper) do
-							if plr ~= game:GetService("Players").LocalPlayer then --and plr:GetAttribute("Team") ~= game:GetService("Players").LocalPlayer:GetAttribute("Team") then
+							if plr ~= game:GetService("Players").LocalPlayer then 
 								spawn(function()
 									if plr ~= nil and plr.Character then
 										game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = plr.Character:FindFirstChild("HumanoidRootPart").CFrame
@@ -3343,8 +3366,8 @@ runcode(function()
 			AutoRapeDist = val
 		end
 	})
-end)
 
+end)
 
 
 
@@ -3441,7 +3464,4 @@ createwarning("Ape", "Logged in as "..(plr1.Name or plr1.DisplayName), 3)
 
 
 
-
-
-
-
+            						
